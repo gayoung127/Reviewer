@@ -9,7 +9,8 @@
 <body>
 <%@ include file="includes/header.jsp" %>
 <div class = "container text-center">
-<a href="/list">목록</a>
+<a href="/list" role="button" class="btn btn-secondary equal-width-button">목록</a>
+<a href="/regist" role="button" class="btn btn-secondary equal-width-button">등록</a>
 </div>
 </body>
 </html>

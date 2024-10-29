@@ -2,14 +2,14 @@ package com.reviewer.mvc.model.dto;
 
 public class Board {
 
-	private int boardId;
+	private int boardId; //auto
 	private String title;
 	private String restaurant;
 	private String coment;
-	private double reviewRating;
-	private int viewCnt = 0;
-	private String regDate;
-	private String writer;
+	private double reviewRating; //auto
+	private int viewCnt = 0; //auto
+	private String regDate; //auto
+	private String writer; //session에서 불러오기
 	
 	public Board() {
 	}

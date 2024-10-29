@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<%@ include file="/WEB-INF/views/includes/header.jsp"%>
 <title>User Page</title>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/includes/header.jsp"%>
 </body>
 </html>

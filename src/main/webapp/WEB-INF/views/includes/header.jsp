@@ -36,10 +36,10 @@ body {
 							<li calss="nav-item"><a class="nav-link active" href="/user/userpage">My Page</a></li>
 							<li calss="nav-item"><a class="nav-link active" href="/list">List</a></li>
 							<li calss="nav-item"><a class="nav-link active" href="/list">List</a></li>
-							<c:if test="${empty sessionScope.loginUser}">
+							<c:if test="${empty sessionScope.loginUserName}">
 								<li class="nav-item"><a class="nav-link active" href="/user/login">Log In</a></li>
 							</c:if>
-							<c:if test="${not empty sessionScope.loginUser}">							
+							<c:if test="${not empty sessionScope.loginUserName}">							
 								<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" href="/user/userpage" role="button" data-bs-toggle="dropdown" aria-expanded="false"> My Page </a>
 								<ul class="dropdown-menu dropdown-menu">

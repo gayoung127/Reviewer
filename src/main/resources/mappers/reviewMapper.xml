@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="com.reviewer.mvc.model.dao.ReviewDao">
-
+<mapper namespace="com.reviewer.mvc.model.dao.ReviewDao">
+	<select id="selectById" resultType="Review">
+		SELECT * FROM review
+		WHERE board_id LIKE #{baordId};
+	</select>
+	<insert id="insert" parameterType="Review">
+		INSERT INTO	review (food_name, food_coment, food_rating, board_id)
+		VALUES (#{foodName}, #{foodComent}, #{foodRating}, #{boardId})
+	</insert>
 </mapper>

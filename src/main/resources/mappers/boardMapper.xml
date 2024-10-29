@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="com.reviewer.mvc.model.dao.BoardDao">
-
+<mapper namespace="com.reviewer.mvc.model.dao.BoardDao">
+	<select id="selectAll" resultType="Board">
+		SELECT * FROM board;	
+	</select>
+	<select id="selectById" resultType="Board">
+		SELECT * FROM board
+		WHERE board_id LIKE #{id};
+	</select>
+	<insert id="insert" parameterType="Board" useGeneratedKeys="true" keyProperty="boardId">
+		INSERT INTO board (board_id, title, restaurant, coment, writer)
+		VALUES (#{boardId}, #{title}, #{restaurant}, #{coment}, #{writer})	
+	</insert>
 </mapper>

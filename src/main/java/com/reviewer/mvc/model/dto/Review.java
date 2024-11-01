@@ -2,7 +2,7 @@ package com.reviewer.mvc.model.dto;
 
 public class Review {
 
-	private int reviewId;
+	private Integer reviewId;
 	private String foodName;
 	private String foodComent;
 	private int foodRating;
@@ -19,7 +19,7 @@ public class Review {
 		this.boardId = boardId;
 	}
 
-	public int getReviewId() {
+	public Integer getReviewId() {
 		return reviewId;
 	}
 

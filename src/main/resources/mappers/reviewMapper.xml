@@ -10,4 +10,17 @@
 		INSERT INTO	review (food_name, food_coment, food_rating, board_id)
 		VALUES (#{foodName}, #{foodComent}, #{foodRating}, #{boardId})
 	</insert>
+	<delete id="deleteByBoardId">
+		DELETE FROM review
+		WHERE board_id LIKE #{id};
+	</delete>
+	<delete id="deleteByReviewId">
+		DELETE FROM review
+		WHERE review_id LIKE #{id};
+	</delete>
+	<update id="update" parameterType="Review">
+		UPDATE review
+		SET food_name = #{foodName},  food_coment = #{foodComent}, food_rating = #{foodRating}
+		WHERE review_id = #{reviewId}
+	</update>
 </mapper>

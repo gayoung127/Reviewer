@@ -10,4 +10,10 @@ public interface ReviewDao {
 
 	void insert(Review review);
 
+	void deleteByBoardId(int id);
+
+	void deleteByReviewId(int id);
+
+	void update(Review review);
+
 }

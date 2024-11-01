@@ -13,4 +13,13 @@
 		INSERT INTO board (board_id, title, restaurant, coment, writer)
 		VALUES (#{boardId}, #{title}, #{restaurant}, #{coment}, #{writer})	
 	</insert>
+	<delete id="delete">
+		DELETE FROM board
+		WHERE board_id LIKE #{id};
+	</delete>
+	<update id="update" parameterType="Board">
+		UPDATE board
+		SET title = #{title}, restaurant = #{restaurant}, coment = #{coment}, review_rating = #{reviewRating}
+		WHERE board_id = #{boardId}
+	</update>
 </mapper>

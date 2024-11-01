@@ -14,8 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.reviewer.mvc.model.dto.Board;
 import com.reviewer.mvc.model.dto.Review;
+import com.reviewer.mvc.model.dto.ReviewWrapper;
 import com.reviewer.mvc.model.service.BoardService;
 import com.reviewer.mvc.model.service.ReviewService;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
+
+
 
 
 @Controller
@@ -67,15 +72,58 @@ public class BoardController {
 	
 	@PostMapping("regist")
 	@Transactional
-	public String regist(@ModelAttribute Board board, @ModelAttribute List<Review> reviews) {
+	public String regist(@ModelAttribute Board board, @ModelAttribute ReviewWrapper reviewWrapper) {
 		boardService.writeBoard(board);
 		
+		List<Review> reviews = reviewWrapper.getReviews();
+		double rating = 0;
 		for(Review review : reviews) {
 			review.setBoardId(board.getBoardId());
 			reviewService.writeReview(review);
+			rating += review.getFoodRating();
 		}
+		rating = rating / reviews. size();
+		board.setReviewRating(rating);
+		boardService.updateBoard(board);
+		return "redirect:/list";
+	}
+	
+	@GetMapping("/delete/{id}")
+	@Transactional
+	public String deleteBoard(@PathVariable("id") int id) {
+		boardService.deleteBoard(id);
+		reviewService.deleteByBoardId(id);
 		
-		return "/list";
+		return "redirect:/list";
+	}
+	
+	@GetMapping("/update/{id}")
+	public String updateForm(@PathVariable("id") int id, Model model) {
+		Board board = boardService.getBoardByid(id);
+		model.addAttribute("board", board);
+		
+		List<Review> reviews = reviewService.getReviewsById(id);
+		model.addAttribute("reviews", reviews);
+		
+		return "/board/updateForm";
+	}
+	
+	@PostMapping("/update")
+	@Transactional
+	public String update( @ModelAttribute Board board, @ModelAttribute ReviewWrapper reviewWrapper) {
+		//기존 보드에 저장되어 있는 리뷰들 가져오기
+		List<Review> updateReviews = reviewWrapper.getReviews();
+		
+		double newRating = 0;
+		for(Review updateReview : updateReviews) {
+			newRating += updateReview.getFoodRating();
+		}
+		newRating = newRating/ updateReviews.size();
+		board.setReviewRating(newRating);
+		boardService.updateBoard(board);
+		reviewService.updateReviews(board.getBoardId(), updateReviews);
+		//수정된 세부 페이지로 리다이렉트
+		return "redirect:/detail/" + board.getBoardId();
 	}
 	
 }
